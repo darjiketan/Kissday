@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kiss Day – Komal 💋❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Outfit&display=swap');
+
+body{
+    margin:0;
+    font-family:'Outfit',sans-serif;
+    background:radial-gradient(circle at top,#ffe0e9,#ff7aa2);
+    height:100vh;
+    overflow:hidden;
+    color:#6b1b3a;
+}
+
+.center{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hidden{display:none;}
+.love{font-family:'Pacifico',cursive;}
+
+button{
+    margin-top:25px;
+    padding:15px 38px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff3d7f,#ff85a1);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* 💞 NAME ANIMATION */
+.names{
+    font-family:'Pacifico',cursive;
+    font-size:40px;
+    animation:heartbeat 1.4s infinite;
+    margin-bottom:10px;
+}
+
+@keyframes heartbeat{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+}
+
+/* 💋 KISS ICON */
+.kiss{
+    font-size:90px;
+    animation:pulse 1.4s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+/* 🌸 FLOATING */
+.float{
+    position:fixed;
+    top:-20px;
+    animation:fall linear infinite;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* 📸 PHOTO */
+.photo{
+    width:240px;
+    height:320px;
+    border-radius:20px;
+    object-fit:cover;
+    box-shadow:0 20px 40px rgba(0,0,0,0.35);
+    animation:zoomIn 1.6s ease;
+}
+
+@keyframes zoomIn{
+    from{transform:scale(0);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+/* 💌 LETTER */
+.letter{
+    background:#fff;
+    padding:22px;
+    border-radius:18px;
+    max-width:320px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.25);
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="music"></audio>
+
+<!-- SCENE 1 -->
+<div id="s1" class="center">
+    <div class="names">Komal ❤️ Ketan</div>
+    <div class="kiss">💋</div>
+    <h1 class="love" style="font-size:46px;">Kiss Day</h1>
+    <p>Komal, ek pyara sa kiss tumhare liye ❤️</p>
+    <button onclick="start()">Come Closer 😘</button>
+</div>
+
+<!-- SCENE 2 -->
+<div id="s2" class="center hidden">
+    <h2 class="love" style="font-size:40px;">Virtual Kiss 💋</h2>
+    <p id="msg" style="font-size:19px;min-height:80px;max-width:330px;"></p>
+
+    <h3>Kisses Count: <span id="count">0</span> 💖</h3>
+    <button onclick="kiss()">Give a Kiss 😘</button>
+</div>
+
+<!-- SECRET LETTER -->
+<div id="letter" class="center hidden">
+    <div class="letter">
+        <h2 class="love">For You Komal 💌</h2>
+        <p style="font-size:18px;">
+            Har kiss mein sirf pyaar nahi,<br>
+            meri care, respect aur hamesha saath rehne ka promise hai ❤️<br><br>
+            Tum meri zindagi ka sabse soft ehsaas ho 💞
+        </p>
+        <p class="love">Happy Kiss Day 😘</p>
+    </div>
+</div>
+
+<!-- PHOTO REVEAL -->
+<div id="photo" class="center hidden">
+    <img src="couple.png" class="photo">
+    <h2 class="love" style="margin-top:15px;">Forever Us 💞</h2>
+    <p>Har kiss ke saath hum aur kareeb aa jaate hain ❤️</p>
+</div>
+
+<script>
+/* 🎵 PLAYLIST */
+const songs=[
+ "romantic4.mp3",
+ "romantic.mp3",
+ "romantic2.mp3",
+ "romantic3.mp3"
+];
+
+let songIndex=0;
+const music=document.getElementById("music");
+music.src=songs[0];
+music.addEventListener("ended",()=>{
+    songIndex=(songIndex+1)%songs.length;
+    music.src=songs[songIndex];
+    music.play();
+});
+
+/* 💖 MESSAGES */
+const messages=[
+ "Ye kiss sirf lips tak nahi, dil tak jaati hai ❤️",
+ "Tumhare kareeb hona mujhe sabse zyada sukoon deta hai 😘",
+ "Har kiss mein main tumhe aur apna bana leta hoon 💞",
+ "Tumhari ek kiss meri poori duniya badal sakti hai 💋"
+];
+
+let m=0,c=0,kissCount=0;
+
+function show(id){
+ document.querySelectorAll(".center").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+}
+
+function start(){
+ music.play().catch(()=>{});
+ show("s2");
+ typeMsg();
+ startFloating();
+}
+
+function typeMsg(){
+ const text=messages[m];
+ if(c<text.length){
+  msg.innerHTML+=text[c++];
+  setTimeout(typeMsg,45);
+ }else{
+  setTimeout(()=>{
+   msg.innerHTML="";
+   c=0;
+   m=(m+1)%messages.length;
+   typeMsg();
+  },1600);
+ }
+}
+
+/* 🔁 FLOW FIXED HERE */
+function kiss(){
+ kissCount++;
+ document.getElementById("count").innerText=kissCount;
+
+ if(kissCount===5){
+  show("letter");
+ }
+ if(kissCount===8){
+  show("photo");
+ }
+}
+
+function startFloating(){
+ setInterval(()=>{
+  const el=document.createElement("div");
+  el.className="float";
+  el.innerHTML=Math.random()>0.5?"💋":"❤️";
+  el.style.left=Math.random()*100+"vw";
+  el.style.fontSize=20+Math.random()*20+"px";
+  el.style.animationDuration=4+Math.random()*4+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),9000);
+ },300);
+}
+</script>
+
+</body>
+</html>
