@@ -43,7 +43,7 @@ button{
     box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* 💞 NAME ANIMATION */
+/* NAME ANIMATION */
 .names{
     font-family:'Pacifico',cursive;
     font-size:40px;
@@ -56,7 +56,7 @@ button{
     50%{transform:scale(1.15);}
 }
 
-/* 💋 KISS ICON */
+/* KISS ICON */
 .kiss{
     font-size:90px;
     animation:pulse 1.4s infinite;
@@ -67,7 +67,7 @@ button{
     50%{transform:scale(1.2);}
 }
 
-/* 🌸 FLOATING */
+/* FLOATING */
 .float{
     position:fixed;
     top:-20px;
@@ -82,22 +82,7 @@ button{
     }
 }
 
-/* 📸 PHOTO */
-.photo{
-    width:240px;
-    height:320px;
-    border-radius:20px;
-    object-fit:cover;
-    box-shadow:0 20px 40px rgba(0,0,0,0.35);
-    animation:zoomIn 1.6s ease;
-}
-
-@keyframes zoomIn{
-    from{transform:scale(0);opacity:0;}
-    to{transform:scale(1);opacity:1;}
-}
-
-/* 💌 LETTER */
+/* LETTER */
 .letter{
     background:#fff;
     padding:22px;
@@ -110,7 +95,7 @@ button{
 
 <body>
 
-<!-- 🎵 MUSIC -->
+<!-- MUSIC -->
 <audio id="music"></audio>
 
 <!-- SCENE 1 -->
@@ -144,15 +129,8 @@ button{
     </div>
 </div>
 
-<!-- PHOTO REVEAL -->
-<div id="photo" class="center hidden">
-    <img src="couple.png" class="photo">
-    <h2 class="love" style="margin-top:15px;">Forever Us 💞</h2>
-    <p>Har kiss ke saath hum aur kareeb aa jaate hain ❤️</p>
-</div>
-
 <script>
-/* 🎵 PLAYLIST */
+/* PLAYLIST */
 const songs=[
  "romantic4.mp3",
  "romantic.mp3",
@@ -169,7 +147,7 @@ music.addEventListener("ended",()=>{
     music.play();
 });
 
-/* 💖 MESSAGES */
+/* MESSAGES */
 const messages=[
  "Ye kiss sirf lips tak nahi, dil tak jaati hai ❤️",
  "Tumhare kareeb hona mujhe sabse zyada sukoon deta hai 😘",
@@ -206,16 +184,13 @@ function typeMsg(){
  }
 }
 
-/* 🔁 FLOW FIXED HERE */
+/* FLOW: s2 → letter */
 function kiss(){
  kissCount++;
  document.getElementById("count").innerText=kissCount;
 
  if(kissCount===5){
   show("letter");
- }
- if(kissCount===8){
-  show("photo");
  }
 }
 
